@@ -1,0 +1,6 @@
+{
+  "name": "AutoRedial Pro - Android Telecom & Millisecond VAD Audio Engine",
+  "description": "Production-ready Android Kotlin application and interactive emulator for instant auto-redial with millisecond Voice Activity Detection (VAD), IVR prompt disconnect, and ringback tone intelligence.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
