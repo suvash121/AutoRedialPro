@@ -1936,11 +1936,33 @@ jobs:
           cp app/build/outputs/apk/debug/app-debug.apk ./app-debug.apk
           echo "APK_READY"
 
-      - name: Upload Debug APK Artifact
-        uses: actions/upload-artifact@v4
+      - name: Create GitHub Release & Upload APK
+        uses: softprops/action-gh-release@v2
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
         with:
-          name: AutoRedialPro-app-debug.apk
-          path: ./app-debug.apk
-          retention-days: 14`
+          tag_name: v1.0.0
+          name: "AutoRedial Pro v1.0.0 (Official APK)"
+          body: |
+            ## 📱 AutoRedial Pro v1.0.0 - Android APK
+
+            Download the official **AutoRedial Pro** application below!
+
+            ### ✨ Key Features:
+            - **Millisecond Voice Activity Detection (VAD)**: Disconnects within milliseconds (<35ms) upon detecting robot IVR announcements or busy tones.
+            - **Ringing Cadence Discrimination**: Detects dual-frequency 440Hz/480Hz ring patterns and keeps calls alive.
+            - **Smart Stop Condition**: Automatically stops redialing when the remote party answers.
+            - **In-App Dialpad with DTMF**: Dial directly with audio tones.
+            - **Auto-Speakerphone**: Automatically routes call audio to hands-free speaker on ring or pickup.
+            - **Redial Stream Muting**: Prevents annoying audio clicks during rapid dialing cycles.
+            - **0–2000ms Redial Delay Slider**: Adjust the interval between attempts.
+
+            Download the **AutoRedialPro-v1.0.apk** file below and open it on your Android phone to install!
+          files: ./app-debug.apk
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
+    permissions:
+      contents: write`
   }
 ];
